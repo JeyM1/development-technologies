@@ -7,6 +7,6 @@ public class Dough extends Product {
 
     @Override
     public void cook() {
-        System.out.println("Making pizza dough..");
+        System.out.println("Making pizza dough.. Done");
     }
 }
