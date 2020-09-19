@@ -22,7 +22,7 @@ public class Mushrooms extends Product {
         }
     }
 
-    private ArrayList<Mushroom> _mushrooms;
+    private final ArrayList<Mushroom> _mushrooms;
 
     public Mushrooms(Integer mushroomsCount) {
         super(0);

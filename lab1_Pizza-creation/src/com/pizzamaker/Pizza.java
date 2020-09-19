@@ -75,12 +75,15 @@ public class Pizza {
         System.out.println(" --- Pizza Info ---");
         System.out.println("Pizza name: " + _name);
         System.out.println("Pizza size: " + _size);
-        System.out.println("Pizza components (total count: " + _components.size() + "):");
+        System.out.println("Pizza components:");
+        int count = 0;
         for (Iterator<PizzaComponent> it = _components.iterator(); it.hasNext(); ) {
             PizzaComponent cmp = it.next();
             System.out.println(" - " + cmp + ": total count=" + cmp.count() + "; total mass=" + cmp.mass());
+            count += cmp.count();
         }
-        System.out.println("Total pizza mass: " + _totalMass + " grams.");
+        System.out.println("Total count: " + count + " components");
+        System.out.println("Total pizza mass: " + _totalMass + " grams");
         System.out.println("Current pizza state: " + _state);
     }
 }
