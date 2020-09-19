@@ -1,22 +1,21 @@
 package com.pizzamaker;
 
-import com.pizzamaker.Products.Cheese;
-import com.pizzamaker.Products.Dough;
+import com.pizzamaker.Products.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList<PizzaComponent> components = new ArrayList<PizzaComponent>();
-		components.add(new Dough(10));
-		components.add(new Cheese(100, "mozzarella"));
-		components.add(new Cheese(100, "asdasd"));
-		components.add(new Cheese(100, "asdasd"));
-		components.add(new Cheese(100, "adsasdsad"));
-		Pizza sirnaya = new Pizza(components, Pizza.PizzaSize.LARGE);
-		sirnaya.cook();
+		Pizza homePizza = new Pizza(new ArrayList<>(), "Home Pizza",  Pizza.PizzaSize.MEDIUM);
+		homePizza.addPizzaComponent(new Dough(200))
+				.addPizzaComponent(new Cheese(50, "mozzarella"))
+				.addPizzaComponent(new Mushrooms(5))
+				.addPizzaComponent(new Cheese(20, "feta crumbled"))
+				.addPizzaComponent(new Sausage(150))
+				.addPizzaComponent(new Pepper(20));
+		homePizza.cook();
+		homePizza.pizzaInfo();
+		homePizza.startDelivery();
 	}
 }

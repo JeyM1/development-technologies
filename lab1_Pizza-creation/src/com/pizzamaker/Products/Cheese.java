@@ -10,6 +10,11 @@ public class Cheese extends Product {
 
     @Override
     public void cook() {
-        System.out.println("Adding " + this._mass + " grams of \"" + this._name + "\" cheese");
+        System.out.println("Adding " + this._mass + " grams of \"" + this._name + "\" cheese.");
+    }
+
+    @Override
+    public String toString() {
+        return "cheese";
     }
 }

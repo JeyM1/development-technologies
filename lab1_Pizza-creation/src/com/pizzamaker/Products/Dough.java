@@ -9,4 +9,9 @@ public class Dough extends Product {
     public void cook() {
         System.out.println("Making pizza dough.. Done");
     }
+
+    @Override
+    public String toString() {
+        return "dough";
+    }
 }
