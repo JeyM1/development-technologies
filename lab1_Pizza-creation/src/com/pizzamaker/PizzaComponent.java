@@ -1,7 +1,9 @@
 package com.pizzamaker;
 
 public interface PizzaComponent {
-    void cook();
-    int count();
-    int mass();
+	void cook();
+
+	int count();
+
+	int mass();
 }
