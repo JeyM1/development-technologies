@@ -2,6 +2,7 @@ package com.pizzamaker;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Random;
 
 enum PizzaSize {
     SMALL, MEDIUM, LARGE, EXTRA_LARGE;
@@ -46,10 +47,12 @@ public class Pizza {
 
     public void cook() {
         changePizzaState(PizzaState.COOKING);
+        Random rnd = new Random();
+
         Iterator<PizzaComponent> it = _components.iterator();
         while (it.hasNext()) {
             PizzaComponent cmp = it.next();
-            cmp.cook();
+            cmp.cook(rnd.nextInt(500));
         }
         changePizzaState(PizzaState.BAKING);
         try {

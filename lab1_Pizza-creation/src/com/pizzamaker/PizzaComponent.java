@@ -1,10 +1,9 @@
 package com.pizzamaker;
 
 public interface PizzaComponent {
-	// TODO: функции с разным кол-вом параметров
-	void cook();
+    void cook(int delay);
 
-	int count();
+    int count();
 
-	int mass();
+    int mass();
 }
