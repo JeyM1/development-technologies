@@ -1,8 +1,10 @@
 package com.pizzamaker;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Random;
+import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
+import com.pizzamaker.Products.IncompatibleProductsChain;
+import com.pizzamaker.Products.Product;
+
+import java.util.*;
 
 enum PizzaSize {
     SMALL, MEDIUM, LARGE, EXTRA_LARGE;
@@ -27,17 +29,20 @@ public class Pizza {
     private final Collection<PizzaComponent> _components;
     private final String _name;
     private int _totalMass;
+    private IncompatibleProductsChain _incompatibleProductsChain;
 
     private final PizzaSize _size;
 
     private PizzaState _state;
 
-    public Pizza(Collection<PizzaComponent> _components, String name, PizzaSize _size) {
+    public Pizza(Collection<PizzaComponent> _components, String name, PizzaSize _size,
+                 IncompatibleProductsChain incompatibleProductsChain) {
         this._components = _components;
         this._name = name;
         this._size = _size;
         this._state = PizzaState.NOT_READY;
         this._totalMass = 0;
+        this._incompatibleProductsChain = incompatibleProductsChain;
     }
 
     private void changePizzaState(PizzaState state) {
@@ -65,7 +70,15 @@ public class Pizza {
         changePizzaState(PizzaState.READY);
     }
 
-    public Pizza addPizzaComponent(PizzaComponent component) {
+    public Pizza addPizzaComponent(PizzaComponent component) throws IncompatibleComponentException {
+        if (this._components.stream()
+                .anyMatch(currComp ->
+                        _incompatibleProductsChain.contains(Map.entry(currComp.getClass(), component.getClass())) ||
+                        _incompatibleProductsChain.contains(Map.entry(component.getClass(), currComp.getClass()))
+                )
+        ) {
+            throw new IncompatibleComponentException("Cannot add \"" + component + "\".");
+        }
         this._components.add(component);
         this._totalMass += component.mass();
         return this;

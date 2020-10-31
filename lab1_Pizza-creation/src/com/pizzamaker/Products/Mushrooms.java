@@ -18,7 +18,7 @@ public class Mushrooms extends Product {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Just added a simple mushroom weighing " + _mass + " grams");
+            System.out.println("Just added a simple mushroom weighing " + _mass + " grams.");
         }
 
         @Override
