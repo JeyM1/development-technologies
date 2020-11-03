@@ -22,4 +22,9 @@ public class Cheese extends Product {
     public String toString() {
         return "cheese";
     }
+
+    @Override
+    public int hashCode() {
+        return _name.hashCode() + _mass.hashCode() + this.toString().hashCode();
+    }
 }

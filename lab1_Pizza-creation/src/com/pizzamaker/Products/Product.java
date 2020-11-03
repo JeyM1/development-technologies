@@ -18,4 +18,9 @@ public abstract class Product implements PizzaComponent {
     public int mass() {
         return _mass;
     }
+
+    @Override
+    public int hashCode() {
+        return _mass.hashCode() + this.toString().hashCode();
+    }
 }

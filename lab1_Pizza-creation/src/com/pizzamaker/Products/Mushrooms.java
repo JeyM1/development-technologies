@@ -18,7 +18,7 @@ public class Mushrooms extends Product {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Just added a simple mushroom weighing " + _mass + " grams.");
+            System.out.println("Just added a single mushroom weighing " + _mass + " grams.");
         }
 
         @Override
@@ -56,5 +56,10 @@ public class Mushrooms extends Product {
     @Override
     public String toString() {
         return "mushrooms";
+    }
+
+    @Override
+    public int hashCode() {
+        return this._mushrooms.hashCode();
     }
 }
