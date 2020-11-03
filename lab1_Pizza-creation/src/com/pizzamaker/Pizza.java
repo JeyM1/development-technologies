@@ -105,4 +105,9 @@ public class Pizza {
         System.out.println("Total pizza mass: " + _totalMass + " grams");
         System.out.println("Current pizza state: " + _state);
     }
+
+    @Override
+    public int hashCode() {
+        return this._components.hashCode() + this._name.hashCode() + this._size.hashCode() + this._state.hashCode();
+    }
 }
