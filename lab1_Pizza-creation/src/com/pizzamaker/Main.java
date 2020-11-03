@@ -1,5 +1,6 @@
 package com.pizzamaker;
 
+import com.pizzamaker.PizzaExceptions.AlreadyCookedException;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.*;
 
@@ -29,10 +30,12 @@ public class Main {
             System.err.println(e.getMessage());
         }
 
-
-
-//        homePizza.cook();
-//        homePizza.pizzaInfo();
-//        homePizza.startDelivery();
+        try {
+            homePizza.cook();
+        } catch (AlreadyCookedException e) {
+            e.printStackTrace();
+        }
+        homePizza.pizzaInfo();
+        homePizza.startDelivery();
     }
 }

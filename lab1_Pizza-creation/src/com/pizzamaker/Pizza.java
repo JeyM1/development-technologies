@@ -1,5 +1,6 @@
 package com.pizzamaker;
 
+import com.pizzamaker.PizzaExceptions.AlreadyCookedException;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.IncompatibleProductsChain;
 import com.pizzamaker.Products.Product;
@@ -17,6 +18,10 @@ enum PizzaSize {
 
 enum PizzaState {
     NOT_READY, COOKING, BAKING, READY, IN_DELIVERY;
+
+    public boolean isReady() {
+        return this.compareTo(PizzaState.READY) >= 0;
+    }
 
     @Override
     public String toString() {
@@ -50,7 +55,10 @@ public class Pizza {
         System.out.println("Pizza \"" + _name + "\" changed state to: " + this._state);
     }
 
-    public void cook() {
+    public void cook() throws AlreadyCookedException {
+        if(this._state.isReady()) {
+            throw new AlreadyCookedException();
+        }
         changePizzaState(PizzaState.COOKING);
         Random rnd = new Random();
 
