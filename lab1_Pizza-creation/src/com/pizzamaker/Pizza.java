@@ -120,6 +120,19 @@ public class Pizza {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pizza pizza = (Pizza) o;
+        return _totalMass == pizza._totalMass &&
+                Objects.equals(_components, pizza._components) &&
+                Objects.equals(_name, pizza._name) &&
+                Objects.equals(_incompatibleProductsChain, pizza._incompatibleProductsChain) &&
+                _size == pizza._size &&
+                _state == pizza._state;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb
