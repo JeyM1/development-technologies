@@ -56,7 +56,7 @@ public class Pizza {
     }
 
     public void cook() throws AlreadyCookedException {
-        if(this._state.isReady()) {
+        if (this._state.isReady()) {
             throw new AlreadyCookedException();
         }
         changePizzaState(PizzaState.COOKING);
@@ -82,7 +82,7 @@ public class Pizza {
         if (this._components.stream()
                 .anyMatch(currComp ->
                         _incompatibleProductsChain.contains(Map.entry(currComp.getClass(), component.getClass())) ||
-                        _incompatibleProductsChain.contains(Map.entry(component.getClass(), currComp.getClass()))
+                                _incompatibleProductsChain.contains(Map.entry(component.getClass(), currComp.getClass()))
                 )
         ) {
             throw new IncompatibleComponentException("Cannot add \"" + component + "\".");
@@ -117,5 +117,24 @@ public class Pizza {
     @Override
     public int hashCode() {
         return this._components.hashCode() + this._name.hashCode() + this._size.hashCode() + this._state.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append("Pizza: ")
+                .append(this._name)
+                .append("\nmass:")
+                .append(this._totalMass)
+                .append("\nstate: ")
+                .append(this._state)
+                .append("\nsize: ")
+                .append(this._size)
+                .append("\ncomponents: ");
+        this._components.forEach(comp -> sb
+                .append("\n  - ")
+                .append(comp));
+        return sb.toString();
     }
 }
