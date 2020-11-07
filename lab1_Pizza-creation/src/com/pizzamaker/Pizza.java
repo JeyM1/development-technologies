@@ -3,7 +3,6 @@ package com.pizzamaker;
 import com.pizzamaker.PizzaExceptions.AlreadyCookedException;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.IncompatibleProductsChain;
-import com.pizzamaker.Products.Product;
 
 import java.util.*;
 
@@ -32,6 +31,7 @@ enum PizzaState {
 public class Pizza {
 
     private final Collection<PizzaComponent> _components;
+    private int _actualComponentsCount = 0;
     private final String _name;
     private int _totalMass;
     private IncompatibleProductsChain _incompatibleProductsChain;
@@ -89,7 +89,20 @@ public class Pizza {
         }
         this._components.add(component);
         this._totalMass += component.mass();
+        this._actualComponentsCount += component.count();
         return this;
+    }
+
+    public Collection<PizzaComponent> getComponents() {
+        return _components;
+    }
+
+    public int getActualComponentsCount() {
+        return _actualComponentsCount;
+    }
+
+    public IncompatibleProductsChain getIncompatibleProductsChain() {
+        return _incompatibleProductsChain;
     }
 
     public void startDelivery() {

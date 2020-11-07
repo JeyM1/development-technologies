@@ -1,5 +1,7 @@
 package com.pizzamaker.Products;
 
+import java.util.Objects;
+
 public class Cheese extends Product {
     private final String _name;
 
@@ -24,7 +26,16 @@ public class Cheese extends Product {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Cheese cheese = (Cheese) o;
+        return Objects.equals(_name, cheese._name);
+    }
+
+    @Override
     public int hashCode() {
-        return _name.hashCode() + _mass.hashCode() + this.toString().hashCode();
+        return Objects.hash(super.hashCode(), _name);
     }
 }
