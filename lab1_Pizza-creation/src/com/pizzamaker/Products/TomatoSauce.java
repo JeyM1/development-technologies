@@ -15,15 +15,19 @@ public class TomatoSauce extends Product {
         tomato.cook(tomato._mass / 5);
     }
 
+    public int getTotalTomatoesCount() {
+        return _totalTomatoesCount;
+    }
+
     @Override
     public void cook(int delay) {
+        System.out.println("Cooking tomato sauce (" + _mass + "grams), total tomatoes count = " +
+                _totalTomatoesCount + ".");
         try {
             Thread.sleep(delay);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Cooking tomato sauce (" + _mass + "grams), total tomatoes count = " +
-                _totalTomatoesCount + ".");
     }
 
     @Override

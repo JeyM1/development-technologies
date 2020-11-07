@@ -101,6 +101,10 @@ public class Pizza {
         return _actualComponentsCount;
     }
 
+    public IncompatibleProductsChain getIncompatibleProductsChain() {
+        return _incompatibleProductsChain;
+    }
+
     public void startDelivery() {
         changePizzaState(PizzaState.IN_DELIVERY);
         System.out.println("Have a wonderful day! :)");
