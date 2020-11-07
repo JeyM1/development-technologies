@@ -2,6 +2,7 @@ package com.pizzamaker;
 
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.*;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,8 +38,21 @@ public class PizzaTest {
         } catch (IncompatibleComponentException e) {
             e.printStackTrace();
         }
-        assert Objects.equals(basicPizza, secondBasicPizza);
+        Assert.assertEquals(basicPizza, secondBasicPizza);
     }
 
+    @Test
+    public void testAddMushroomsComponent() {
+        final int prevLength = basicPizza.getComponents().size();
+        final int prevCount = basicPizza.getActualComponentsCount();
+        try {
+            basicPizza.addPizzaComponent(new Mushrooms(5));
+        } catch (IncompatibleComponentException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertEquals(prevLength + 1, basicPizza.getComponents().size());
+        Assert.assertEquals(prevCount + 5, basicPizza.getActualComponentsCount());
+    }
 
 }
