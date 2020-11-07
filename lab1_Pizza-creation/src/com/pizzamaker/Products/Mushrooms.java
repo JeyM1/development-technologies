@@ -1,6 +1,7 @@
 package com.pizzamaker.Products;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -59,7 +60,16 @@ public class Mushrooms extends Product {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Mushrooms mushrooms = (Mushrooms) o;
+        return Objects.equals(_mushrooms, mushrooms._mushrooms);
+    }
+
+    @Override
     public int hashCode() {
-        return this._mushrooms.hashCode();
+        return Objects.hash(super.hashCode(), _mushrooms);
     }
 }

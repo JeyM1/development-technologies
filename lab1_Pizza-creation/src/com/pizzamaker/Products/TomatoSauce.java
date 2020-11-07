@@ -1,5 +1,7 @@
 package com.pizzamaker.Products;
 
+import java.util.Objects;
+
 public class TomatoSauce extends Product {
     private int _totalTomatoesCount = 0;
 
@@ -27,5 +29,19 @@ public class TomatoSauce extends Product {
     @Override
     public String toString() {
         return "Tomato sauce";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        TomatoSauce that = (TomatoSauce) o;
+        return _totalTomatoesCount == that._totalTomatoesCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), _totalTomatoesCount);
     }
 }

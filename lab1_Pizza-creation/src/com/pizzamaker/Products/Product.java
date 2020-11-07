@@ -2,6 +2,8 @@ package com.pizzamaker.Products;
 
 import com.pizzamaker.PizzaComponent;
 
+import java.util.Objects;
+
 public abstract class Product implements PizzaComponent {
     protected Integer _mass;
 
@@ -21,6 +23,14 @@ public abstract class Product implements PizzaComponent {
 
     @Override
     public int hashCode() {
-        return _mass.hashCode() + this.toString().hashCode();
+        return Objects.hash(_mass);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(_mass, product._mass);
     }
 }

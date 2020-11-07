@@ -20,5 +20,4 @@ public class Pepper extends Product {
     public String toString() {
         return "pepper";
     }
-
 }
