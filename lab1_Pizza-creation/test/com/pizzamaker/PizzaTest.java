@@ -78,7 +78,6 @@ public class PizzaTest {
         Exception exception = Assertions.assertThrows(IncompatibleComponentException.class, () -> {
            basicPizza.addPizzaComponent(pineappleToAdd);
         });
-        System.out.println(exception.getMessage());
         Assertions.assertTrue(exception.getMessage().contains("Cannot add \"" + pineappleToAdd + "\""));
         Assertions.assertEquals(prevCount, basicPizza.getActualComponentsCount());
     }
