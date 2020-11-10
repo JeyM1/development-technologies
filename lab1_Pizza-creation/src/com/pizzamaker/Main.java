@@ -9,6 +9,12 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+
+        // default equals (its bad I know it)
+        IncompatibleComponentException e1 = new IncompatibleComponentException("test");
+        IncompatibleComponentException e2 = new IncompatibleComponentException("test");
+        System.out.println(e1.equals(e2));
+
         // Adding incompatible products
         IncompatibleProductsChain mainIncompatibleProducts = new IncompatibleProductsChain();
         mainIncompatibleProducts.add(Map.entry(Mushrooms.class, Pineapple.class));
