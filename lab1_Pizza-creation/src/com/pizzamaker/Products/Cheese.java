@@ -10,6 +10,10 @@ public class Cheese extends Product {
         this._name = _name;
     }
 
+    public String getName() {
+        return _name;
+    }
+
     @Override
     public void cook(int delay) {
         System.out.println("Adding " + this._mass + " grams of \"" + this._name + "\" cheese.");

@@ -101,6 +101,10 @@ public class Pizza {
         return _actualComponentsCount;
     }
 
+    public int getTotalMass() {
+        return _totalMass;
+    }
+
     public IncompatibleProductsChain getIncompatibleProductsChain() {
         return _incompatibleProductsChain;
     }
