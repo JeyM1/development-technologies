@@ -46,7 +46,7 @@ public class PizzaTest {
     }
 
     @Test
-    public void testAddCommonComponent() {
+    public void AddComponent_AddCommonComponent() {
         final int prevLength = basicPizza.getComponents().size();
         final int prevCount = basicPizza.getActualComponentsCount();
         final int prevMass = basicPizza.getTotalMass();
@@ -70,9 +70,12 @@ public class PizzaTest {
     }
 
     @Test
-    public void testAddMushroomsComponent() {
+    public void AddComponent_AddMushroomsComponent() {
         final int prevLength = basicPizza.getComponents().size();
         final int prevCount = basicPizza.getActualComponentsCount();
+        Mushrooms component = Mockito.mock(Mushrooms.class);
+        Mockito.when(component.mass()).thenReturn(10);
+        Mockito.when(component.count()).thenReturn(5);
         try {
             basicPizza.addPizzaComponent(new Mushrooms(5));
         } catch (IncompatibleComponentException e) {
@@ -84,7 +87,7 @@ public class PizzaTest {
     }
 
     @Test
-    public void testAddIncompatiblePizzaComponent() {
+    public void AddComponent_AddIncompatiblePizzaComponent() {
         final int prevCount = basicPizza.getActualComponentsCount();
         basicIncompatibleProducts.add(Map.entry(Mushrooms.Mushroom.class, Pineapple.class));
         Pineapple pineappleToAdd = new Pineapple(100);
