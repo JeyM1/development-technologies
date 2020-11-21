@@ -11,8 +11,9 @@ public class TomatoSauce extends Product {
 
     public void addTomatoToSauce(Tomato tomato) {
         ++this._totalTomatoesCount;
-        this._mass += tomato._mass;
-        tomato.cook(tomato._mass / 5);
+        final int mass = tomato.mass();
+        this._mass += mass;
+        tomato.cook(mass / 5);
     }
 
     public int getTotalTomatoesCount() {
