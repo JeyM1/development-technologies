@@ -23,7 +23,7 @@ public class PizzaTest {
         basicPizza = new Pizza(new ArrayList<>(), "basicPizza", PizzaSize.MEDIUM, basicIncompatibleProducts);
         try {
             basicPizza.addPizzaComponent(new Dough(100))
-                    //.addPizzaComponent(new Cheese(50, "mozzarella"))
+                    .addPizzaComponent(new Cheese(50, "mozzarella"))
                     .addPizzaComponent(new Mushrooms.Mushroom(5))
                     .addPizzaComponent(new Pepper(10));
         } catch (IncompatibleComponentException e) {
@@ -46,7 +46,7 @@ public class PizzaTest {
     }
 
     @Test
-    public void testAddCommonComponent() {
+    public void AddComponent_AddCommonComponent() {
         final int prevLength = basicPizza.getComponents().size();
         final int prevCount = basicPizza.getActualComponentsCount();
         final int prevMass = basicPizza.getTotalMass();
@@ -70,21 +70,26 @@ public class PizzaTest {
     }
 
     @Test
-    public void testAddMushroomsComponent() {
+    public void AddComponent_AddMushroomsComponent() {
         final int prevLength = basicPizza.getComponents().size();
         final int prevCount = basicPizza.getActualComponentsCount();
+        Mushrooms component = Mockito.mock(Mushrooms.class);
+        Mockito.when(component.mass()).thenReturn(10);
+        Mockito.when(component.count()).thenReturn(5);
         try {
-            basicPizza.addPizzaComponent(new Mushrooms(5));
+            basicPizza.addPizzaComponent(component);
         } catch (IncompatibleComponentException e) {
             e.printStackTrace();
         }
 
         Assertions.assertEquals(prevLength + 1, basicPizza.getComponents().size());
         Assertions.assertEquals(prevCount + 5, basicPizza.getActualComponentsCount());
+
+        Mockito.verify(component).count();
     }
 
     @Test
-    public void testAddIncompatiblePizzaComponent() {
+    public void AddComponent_AddIncompatiblePizzaComponent() {
         final int prevCount = basicPizza.getActualComponentsCount();
         basicIncompatibleProducts.add(Map.entry(Mushrooms.Mushroom.class, Pineapple.class));
         Pineapple pineappleToAdd = new Pineapple(100);
