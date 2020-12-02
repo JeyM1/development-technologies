@@ -18,7 +18,7 @@ public class Dough extends Product {
 
     @Override
     public String toString() {
-        return "dough";
+        return "dough " + " (" + _mass + "g)";
     }
 
 }

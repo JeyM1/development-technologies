@@ -17,7 +17,7 @@ public class Tomato extends Product {
 
     @Override
     public String toString() {
-        return "tomato";
+        return "tomato" + " (" + _mass + "g)";
     }
 
 }

@@ -18,6 +18,6 @@ public class Pepper extends Product {
 
     @Override
     public String toString() {
-        return "pepper";
+        return "pepper" + " (" + _mass + "g)";
     }
 }
