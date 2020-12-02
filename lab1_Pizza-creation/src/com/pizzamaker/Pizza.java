@@ -55,6 +55,39 @@ public class Pizza {
         System.out.println("Pizza \"" + _name + "\" changed state to: " + this._state);
     }
 
+    public interface FindInterface {
+        boolean findCallback(PizzaComponent component);
+    }
+
+    /**
+     * find - function: finds the first component, that meets callback
+     *
+     * @param cb - lambda callback for applying on each element
+     * @return PizzaComponent if found, else null
+     */
+    public PizzaComponent find(FindInterface cb) {
+        for (PizzaComponent comp : this._components) {
+            if (cb.findCallback(comp))
+                return comp;
+        }
+        return null;
+    }
+
+    /**
+     * findAll - function: finds all components, that meets callback
+     *
+     * @param cb - lambda callback for applying on each element
+     * @return ArrayList<PizzaComponent> - components that meets callback
+     */
+    public ArrayList<PizzaComponent> findAll(FindInterface cb) {
+        ArrayList<PizzaComponent> components = new ArrayList<>();
+        for (PizzaComponent comp : this._components) {
+            if (cb.findCallback(comp))
+                components.add(comp);
+        }
+        return components;
+    }
+
     public void cook() throws AlreadyCookedException {
         if (this._state.isReady()) {
             throw new AlreadyCookedException();
