@@ -5,6 +5,7 @@ import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.IncompatibleProductsChain;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 enum PizzaSize {
     SMALL, MEDIUM, LARGE, EXTRA_LARGE;
@@ -55,19 +56,15 @@ public class Pizza {
         System.out.println("Pizza \"" + _name + "\" changed state to: " + this._state);
     }
 
-    public interface FindInterface {
-        boolean findCallback(PizzaComponent component);
-    }
-
     /**
      * find - function: finds the first component, that meets callback
      *
      * @param cb - lambda callback for applying on each element
      * @return PizzaComponent if found, else null
      */
-    public PizzaComponent find(FindInterface cb) {
+    public PizzaComponent find(Predicate<? super PizzaComponent> cb) {
         for (PizzaComponent comp : this._components) {
-            if (cb.findCallback(comp))
+            if (cb.test(comp))
                 return comp;
         }
         return null;
@@ -79,10 +76,10 @@ public class Pizza {
      * @param cb - lambda callback for applying on each element
      * @return ArrayList<PizzaComponent> - components that meets callback
      */
-    public ArrayList<PizzaComponent> findAll(FindInterface cb) {
+    public ArrayList<PizzaComponent> findAll(Predicate<? super PizzaComponent> cb) {
         ArrayList<PizzaComponent> components = new ArrayList<>();
         for (PizzaComponent comp : this._components) {
-            if (cb.findCallback(comp))
+            if (cb.test(comp))
                 components.add(comp);
         }
         return components;

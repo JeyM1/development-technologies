@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.mockito.Mockito;
 import org.mockito.Mockito.*;
@@ -98,6 +100,41 @@ public class PizzaTest {
         });
         Assertions.assertTrue(exception.getMessage().contains("Cannot add \"" + pineappleToAdd + "\""));
         Assertions.assertEquals(prevCount, basicPizza.getActualComponentsCount());
+    }
+
+    @Test
+    public void find_alwaysFalseCallback() {
+        Assertions.assertNull(basicPizza.find((component -> false)));
+    }
+
+    @Test
+    public void find_findByComponentMass() {
+        Predicate<PizzaComponent> cb = (component -> component.mass() == 50);
+        PizzaComponent expected = basicPizza
+                .getComponents()
+                .stream()
+                .filter(cb)
+                .findFirst()
+                .get();
+        PizzaComponent actual = basicPizza.find(cb);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findAll_alwaysFalseCallback() {
+        Assertions.assertEquals(0, basicPizza.findAll((component -> false)).size());
+    }
+
+    @Test
+    public void findAll_findByComponentMass() {
+        Predicate<PizzaComponent> cb = (component -> component.mass() >= 50);
+        ArrayList<PizzaComponent> expected = basicPizza
+                .getComponents()
+                .stream()
+                .filter(cb)
+                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<PizzaComponent> actual = basicPizza.findAll(cb);
+        Assertions.assertEquals(expected, actual);
     }
 
 }
