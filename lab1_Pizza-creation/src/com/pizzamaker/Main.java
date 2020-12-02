@@ -63,11 +63,8 @@ public class Main {
                         .getComponents()
                         .stream()
                         .reduce(homePizza.getComponents().stream().findFirst().get(),
-                                (component, heaviest) -> {
-                                    if (heaviest.mass() < component.mass())
-                                        heaviest = component;
-                                    return heaviest;
-                                })
+                                (component, heaviest) -> heaviest.mass() < component.mass() ? component : heaviest
+                        )
         );
         System.out.println("Average mass of components: " +
                 homePizza
@@ -88,7 +85,7 @@ public class Main {
         Double averageMushroomsMass = homePizza
                 .getComponents()
                 .stream()
-                .flatMap(component -> component instanceof Mushrooms ? ((Mushrooms)component).getMushrooms().stream() : null)
+                .flatMap(component -> component instanceof Mushrooms ? ((Mushrooms) component).getMushrooms().stream() : null)
                 .mapToInt(comp -> comp.mass())
                 .average()
                 .getAsDouble();
