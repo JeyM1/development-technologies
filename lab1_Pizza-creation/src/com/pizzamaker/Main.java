@@ -57,6 +57,7 @@ public class Main {
         System.out.println("--------------------------");
         System.out.println("Functional testing: ");
         // find
+        System.out.println("Something with 50 grams mass: " + homePizza.find(comp -> comp.mass() == 50).get());
         System.out.println("All cheese in homePizza: " + homePizza.findAll(component -> component instanceof Cheese));
         System.out.println("The most heavy component (by mass): " +
                 homePizza

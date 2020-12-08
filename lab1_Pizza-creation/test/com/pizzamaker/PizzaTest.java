@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -110,13 +111,12 @@ public class PizzaTest {
     @Test
     public void find_findByComponentMass() {
         Predicate<PizzaComponent> cb = (component -> component.mass() == 50);
-        PizzaComponent expected = basicPizza
+        Optional<PizzaComponent> expected = basicPizza
                 .getComponents()
                 .stream()
                 .filter(cb)
-                .findFirst()
-                .get();
-        PizzaComponent actual = basicPizza.find(cb);
+                .findFirst();
+        Optional<PizzaComponent> actual = basicPizza.find(cb);
         Assertions.assertEquals(expected, actual);
     }
 

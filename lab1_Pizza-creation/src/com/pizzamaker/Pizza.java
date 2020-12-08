@@ -63,12 +63,12 @@ public class Pizza {
      * @param cb - lambda callback for applying on each element
      * @return PizzaComponent if found, else null
      */
-    public PizzaComponent find(Predicate<? super PizzaComponent> cb) {
+    public Optional<PizzaComponent> find(Predicate<? super PizzaComponent> cb) {
         for (PizzaComponent comp : this._components) {
             if (cb.test(comp))
-                return comp;
+                return Optional.of(comp);
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
