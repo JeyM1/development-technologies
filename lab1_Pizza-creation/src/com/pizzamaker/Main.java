@@ -59,33 +59,25 @@ public class Main {
         // find
         System.out.println("Something with 50 grams mass: " + homePizza.find(comp -> comp.mass() == 50).get());
         System.out.println("All cheese in homePizza: " + homePizza.findAll(component -> component instanceof Cheese));
-        System.out.println("The most heavy component (by mass): " +
-                homePizza
-                        .getComponents()
-                        .stream()
-                        .max(Comparator.comparingInt(PizzaComponent::mass))
-                        .orElse(null)
+
+        PizzaRepository pizzaRepository = new PizzaRepository(homePizza);
+
+        System.out.println("The most heavy component (by mass): " + pizzaRepository
+                .getMostHeavyComponent()
+                .orElse(null)
         );
         System.out.println("Average mass of components: " +
-                homePizza
-                        .getComponents()
-                        .stream()
-                        .mapToInt(comp -> comp.mass())
-                        .average()
+                pizzaRepository
+                        .getAverageMass()
                         .orElse(Double.NaN)
         );
 
-        Map<String, List<PizzaComponent>> mappedComponents = homePizza
-                .getComponents()
-                .stream()
-                .collect(Collectors.groupingBy(component -> component.mass() > 50 ? "heavy" : "light"));
         System.out.println("Mapped components: ");
-        System.out.println(mappedComponents);
+        System.out.println(pizzaRepository
+                .getMappedComponents(component -> component.mass() > 50 ? "heavy" : "light"));
 
-        double averageMushroomsMass = homePizza
-                .getComponents()
-                .stream()
-                .flatMap(component -> component instanceof Mushrooms ? ((Mushrooms) component).getMushrooms().stream() : null)
+        double averageMushroomsMass = pizzaRepository
+                .getAllMushrooms()
                 .mapToInt(comp -> comp.mass())
                 .average()
                 .orElse(Double.NaN);
