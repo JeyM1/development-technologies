@@ -6,6 +6,7 @@ import com.pizzamaker.Products.IncompatibleProductsChain;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 enum PizzaSize {
     SMALL, MEDIUM, LARGE, EXTRA_LARGE;
@@ -77,12 +78,11 @@ public class Pizza {
      * @return ArrayList<PizzaComponent> - components that meets callback
      */
     public ArrayList<PizzaComponent> findAll(Predicate<? super PizzaComponent> cb) {
-        ArrayList<PizzaComponent> components = new ArrayList<>();
-        for (PizzaComponent comp : this._components) {
-            if (cb.test(comp))
-                components.add(comp);
-        }
-        return components;
+        return this
+                .getComponents()
+                .stream()
+                .filter(cb)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void cook() throws AlreadyCookedException {
