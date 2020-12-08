@@ -62,13 +62,8 @@ public class Main {
                 homePizza
                         .getComponents()
                         .stream()
-                        .reduce(homePizza
-                                        .getComponents()
-                                        .stream()
-                                        .findFirst()
-                                        .get(),
-                                (component, heaviest) -> heaviest.mass() < component.mass() ? component : heaviest
-                        )
+                        .max(Comparator.comparingInt(PizzaComponent::mass))
+                        .orElse(null)
         );
         System.out.println("Average mass of components: " +
                 homePizza
