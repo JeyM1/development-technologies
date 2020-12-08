@@ -105,7 +105,7 @@ public class PizzaTest {
 
     @Test
     public void find_alwaysFalseCallback() {
-        Assertions.assertNull(basicPizza.find((component -> false)));
+        Assertions.assertNull(basicPizza.find((component -> false)).orElse(null));
     }
 
     @Test

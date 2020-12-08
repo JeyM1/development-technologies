@@ -64,11 +64,10 @@ public class Pizza {
      * @return PizzaComponent if found, else null
      */
     public Optional<PizzaComponent> find(Predicate<? super PizzaComponent> cb) {
-        for (PizzaComponent comp : this._components) {
-            if (cb.test(comp))
-                return Optional.of(comp);
-        }
-        return Optional.empty();
+        return this._components
+                .stream()
+                .filter(cb)
+                .findFirst();
     }
 
     /**
