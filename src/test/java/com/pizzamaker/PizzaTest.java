@@ -1,23 +1,17 @@
 package com.pizzamaker;
 
-import com.pizzamaker.Pizza;
-import com.pizzamaker.PizzaComponent;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
-import com.pizzamaker.PizzaSize;
 import com.pizzamaker.Products.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import org.mockito.Mockito;
-import org.mockito.Mockito.*;
 
 public class PizzaTest {
     private Pizza basicPizza;
@@ -100,7 +94,7 @@ public class PizzaTest {
         basicIncompatibleProducts.add(Map.entry(Mushrooms.Mushroom.class, Pineapple.class));
         Pineapple pineappleToAdd = new Pineapple(100);
         Exception exception = Assertions.assertThrows(IncompatibleComponentException.class, () -> {
-           basicPizza.addPizzaComponent(pineappleToAdd);
+            basicPizza.addPizzaComponent(pineappleToAdd);
         });
         Assertions.assertTrue(exception.getMessage().contains("Cannot add \"" + pineappleToAdd + "\""));
         Assertions.assertEquals(prevCount, basicPizza.getActualComponentsCount());
