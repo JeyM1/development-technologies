@@ -1,9 +1,5 @@
-package pizzamaker.Products;
+package com.pizzamaker.Products;
 
-import com.pizzamaker.Products.Cheese;
-import com.pizzamaker.Products.Pineapple;
-import com.pizzamaker.Products.Product;
-import com.pizzamaker.Products.Tomato;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
