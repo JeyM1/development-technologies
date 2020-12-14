@@ -26,7 +26,7 @@ public class Cheese extends Product {
 
     @Override
     public String toString() {
-        return "cheese";
+        return "cheese " + _name + " (" + _mass + "g)";
     }
 
     @Override

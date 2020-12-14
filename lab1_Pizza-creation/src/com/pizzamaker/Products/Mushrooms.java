@@ -41,6 +41,10 @@ public class Mushrooms extends Product {
         }
     }
 
+    public ArrayList<Mushroom> getMushrooms() {
+        return _mushrooms;
+    }
+
     @Override
     public void cook(int delay) {
         System.out.println("Cooking " + _mushrooms.size() + " mushrooms with total mass of " + _mass + " gram.");
@@ -56,7 +60,7 @@ public class Mushrooms extends Product {
 
     @Override
     public String toString() {
-        return "mushrooms";
+        return "mushrooms " + "(" + _mass + "g)";
     }
 
     @Override

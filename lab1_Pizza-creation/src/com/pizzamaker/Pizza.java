@@ -5,6 +5,8 @@ import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.IncompatibleProductsChain;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 enum PizzaSize {
     SMALL, MEDIUM, LARGE, EXTRA_LARGE;
@@ -53,6 +55,33 @@ public class Pizza {
     private void changePizzaState(PizzaState state) {
         this._state = state;
         System.out.println("Pizza \"" + _name + "\" changed state to: " + this._state);
+    }
+
+    /**
+     * find - function: finds the first component, that meets callback
+     *
+     * @param cb - lambda callback for applying on each element
+     * @return PizzaComponent if found, else null
+     */
+    public Optional<PizzaComponent> find(Predicate<? super PizzaComponent> cb) {
+        return this._components
+                .stream()
+                .filter(cb)
+                .findFirst();
+    }
+
+    /**
+     * findAll - function: finds all components, that meets callback
+     *
+     * @param cb - lambda callback for applying on each element
+     * @return ArrayList<PizzaComponent> - components that meets callback
+     */
+    public ArrayList<PizzaComponent> findAll(Predicate<? super PizzaComponent> cb) {
+        return this
+                .getComponents()
+                .stream()
+                .filter(cb)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void cook() throws AlreadyCookedException {

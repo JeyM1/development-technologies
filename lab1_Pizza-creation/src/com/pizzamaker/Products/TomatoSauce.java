@@ -33,7 +33,7 @@ public class TomatoSauce extends Product {
 
     @Override
     public String toString() {
-        return "Tomato sauce";
+        return "tomato sauce" + " (" + _mass + "g)";
     }
 
     @Override
