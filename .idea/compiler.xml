@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="lab1_Pizza-creation" />
+        <module name="development_technologies" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="lab1_Pizza-creation" target="13" />
+      <module name="development_technologies" target="13" />
     </bytecodeTargetLevel>
   </component>
 </project>
