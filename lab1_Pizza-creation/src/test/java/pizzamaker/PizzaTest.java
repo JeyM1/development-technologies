@@ -1,6 +1,9 @@
-package com.pizzamaker;
+package pizzamaker;
 
+import com.pizzamaker.Pizza;
+import com.pizzamaker.PizzaComponent;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
+import com.pizzamaker.PizzaSize;
 import com.pizzamaker.Products.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

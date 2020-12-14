@@ -8,28 +8,6 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-enum PizzaSize {
-    SMALL, MEDIUM, LARGE, EXTRA_LARGE;
-
-    @Override
-    public String toString() {
-        return super.toString().replace('_', ' ').toLowerCase();
-    }
-}
-
-enum PizzaState {
-    NOT_READY, COOKING, BAKING, READY, IN_DELIVERY;
-
-    public boolean isReady() {
-        return this.compareTo(PizzaState.READY) >= 0;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString().replace('_', ' ').toLowerCase();
-    }
-}
-
 public class Pizza {
 
     private final Collection<PizzaComponent> _components;
