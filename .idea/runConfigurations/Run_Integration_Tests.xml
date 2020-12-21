@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Integration Tests" type="JUnit" factoryName="JUnit" singleton="false">
+    <module name="development_technologies" />
+    <useClassPathOnly />
+    <option name="PACKAGE_NAME" value="" />
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="uniqueId" />
+    <option name="PARAMETERS" value="" />
+    <uniqueIds>
+      <uniqueId value="[engine:junit-jupiter]/[class:com.pizzamaker.PizzaIT]" />
+      <uniqueId value="[engine:junit-jupiter]/[class:com.pizzamaker.Products.TomatoSauceIT]" />
+    </uniqueIds>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
