@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class ProductTest {
     @Test
-    public void checkProductEquality() {
+    public void checkEquality() {
         Pineapple pn = new Pineapple(100);
         Pineapple pn2 = new Pineapple(100);
 
