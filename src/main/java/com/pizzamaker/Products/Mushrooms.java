@@ -40,8 +40,17 @@ public class Mushrooms extends Product {
         }
     }
 
+    public Mushrooms(ArrayList<Mushroom> list) {
+        super(list.stream().mapToInt(Product::mass).sum());
+        this._mushrooms = list;
+    }
+
     public ArrayList<Mushroom> getMushrooms() {
         return _mushrooms;
+    }
+
+    public void addMushroom(Mushroom m) {
+        this._mushrooms.add(m);
     }
 
     @Override

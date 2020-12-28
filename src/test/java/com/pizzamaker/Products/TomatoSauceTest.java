@@ -2,48 +2,23 @@ package com.pizzamaker.Products;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Random;
 
 public class TomatoSauceTest {
     @Test
-    public void addToTomatoSauce_addSingleTomato() {
-        TomatoSauce tomatoSauce = new TomatoSauce();
-        Assertions.assertEquals(0, tomatoSauce.mass());
+    void checkEquality() {
 
-        Tomato tomato = Mockito.mock(Tomato.class);
-        Mockito.when(tomato.mass()).thenReturn(100);
+        TomatoSauce ts1 = new TomatoSauce();
+        TomatoSauce ts2 = new TomatoSauce();
+        Tomato t1 = new Tomato(10);
+        Tomato t2 = new Tomato(10);
+        ts1.addTomatoToSauce(t1);
+        ts2.addTomatoToSauce(t2);
 
-        tomatoSauce.addTomatoToSauce(tomato);
-        Assertions.assertEquals(100, tomatoSauce.mass());
-        Assertions.assertEquals(1, tomatoSauce.getTotalTomatoesCount());
+        Assertions.assertEquals(ts1, ts2);
 
-        Mockito.verify(tomato).mass();
-        Mockito.verify(tomato).cook(100 / 5);
-    }
+        ts1.addTomatoToSauce(t2);
+        ts2.addTomatoToSauce(t1);
 
-    @Test
-    public void addToTomatoSauce_addMultipleTomatoes() {
-        TomatoSauce tomatoSauce = new TomatoSauce();
-        final Random rnd = new Random();
-
-        int totalMass = 0;
-        int totalCount = 50;
-
-        for (int i = 0; i < totalCount; i++) {
-            int mass = rnd.nextInt(500);
-            Tomato tomato = Mockito.mock(Tomato.class);
-            Mockito.when(tomato.mass()).thenReturn(mass);
-
-            tomatoSauce.addTomatoToSauce(tomato);
-            totalMass += mass;
-
-            Mockito.verify(tomato).mass();
-            Mockito.verify(tomato).cook(mass / 5);
-        }
-
-        Assertions.assertEquals(totalCount, tomatoSauce.getTotalTomatoesCount());
-        Assertions.assertEquals(totalMass, tomatoSauce.mass());
+        Assertions.assertEquals(ts1, ts2);
     }
 }

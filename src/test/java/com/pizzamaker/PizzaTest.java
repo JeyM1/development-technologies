@@ -46,49 +46,6 @@ public class PizzaTest {
     }
 
     @Test
-    public void AddComponent_AddCommonComponent() {
-        final int prevLength = basicPizza.getComponents().size();
-        final int prevCount = basicPizza.getActualComponentsCount();
-        final int prevMass = basicPizza.getTotalMass();
-        Cheese component = Mockito.mock(Cheese.class);
-        Mockito.when(component.mass()).thenReturn(20);
-        Mockito.when(component.count()).thenReturn(1);
-        Mockito.when(component.getName()).thenReturn("cute cheese");
-
-        try {
-            basicPizza.addPizzaComponent(component);
-        } catch (IncompatibleComponentException e) {
-            e.printStackTrace();
-        }
-
-        Assertions.assertEquals(prevLength + 1, basicPizza.getComponents().size());
-        Assertions.assertEquals(prevCount + 1, basicPizza.getActualComponentsCount());
-        Assertions.assertEquals(prevMass + 20, basicPizza.getTotalMass());
-
-        Mockito.verify(component).mass();
-        Mockito.verify(component).count();
-    }
-
-    @Test
-    public void AddComponent_AddMushroomsComponent() {
-        final int prevLength = basicPizza.getComponents().size();
-        final int prevCount = basicPizza.getActualComponentsCount();
-        Mushrooms component = Mockito.mock(Mushrooms.class);
-        Mockito.when(component.mass()).thenReturn(10);
-        Mockito.when(component.count()).thenReturn(5);
-        try {
-            basicPizza.addPizzaComponent(component);
-        } catch (IncompatibleComponentException e) {
-            e.printStackTrace();
-        }
-
-        Assertions.assertEquals(prevLength + 1, basicPizza.getComponents().size());
-        Assertions.assertEquals(prevCount + 5, basicPizza.getActualComponentsCount());
-
-        Mockito.verify(component).count();
-    }
-
-    @Test
     public void AddComponent_AddIncompatiblePizzaComponent() {
         final int prevCount = basicPizza.getActualComponentsCount();
         basicIncompatibleProducts.add(Map.entry(Mushrooms.Mushroom.class, Pineapple.class));
