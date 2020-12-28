@@ -3,6 +3,8 @@ package com.pizzamaker;
 import com.pizzamaker.PizzaExceptions.AlreadyCookedException;
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.IncompatibleProductsChain;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -32,6 +34,7 @@ enum PizzaState {
 
 
 public class Pizza {
+    private static final Logger logger = LogManager.getLogger(Pizza.class.getName());
 
     private final Collection<PizzaComponent> _components;
     private int _actualComponentsCount = 0;
@@ -55,7 +58,7 @@ public class Pizza {
 
     private void changePizzaState(PizzaState state) {
         this._state = state;
-        System.out.println("Pizza \"" + _name + "\" changed state to: " + this._state);
+        logger.debug("Pizza \"" + _name + "\" changed state to: " + this._state);
     }
 
     /**
@@ -101,10 +104,10 @@ public class Pizza {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            System.out.println("Something went wrong...");
+            logger.error("Something went wrong...");
             System.exit(1);
         }
-        System.out.println("...Done");
+        logger.info("...Done");
         changePizzaState(PizzaState.READY);
     }
 
@@ -141,24 +144,24 @@ public class Pizza {
 
     public void startDelivery() {
         changePizzaState(PizzaState.IN_DELIVERY);
-        System.out.println("Have a wonderful day! :)");
+        logger.info("Have a wonderful day! :)");
     }
 
     public void pizzaInfo() {
-        System.out.println(" --- Pizza Info ---");
-        System.out.println("Pizza name: " + _name);
-        System.out.println("Pizza size: " + _size);
-        System.out.println("Pizza components:");
+        logger.info(" --- Pizza Info ---");
+        logger.info("Pizza name: " + _name);
+        logger.info("Pizza size: " + _size);
+        logger.info("Pizza components:");
         int count = 0;
         Iterator<PizzaComponent> it = _components.iterator();
         while (it.hasNext()) {
             PizzaComponent cmp = it.next();
-            System.out.println(" - " + cmp + ": total count=" + cmp.count() + "; total mass=" + cmp.mass());
+            logger.info(" - " + cmp + ": total count=" + cmp.count() + "; total mass=" + cmp.mass());
             count += cmp.count();
         }
-        System.out.println("Total count: " + count + " components");
-        System.out.println("Total pizza mass: " + _totalMass + " grams");
-        System.out.println("Current pizza state: " + _state);
+        logger.info("Total count: " + count + " components");
+        logger.info("Total pizza mass: " + _totalMass + " grams");
+        logger.info("Current pizza state: " + _state);
     }
 
     @Override

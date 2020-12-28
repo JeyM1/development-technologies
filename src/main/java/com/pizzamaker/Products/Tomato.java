@@ -12,7 +12,7 @@ public class Tomato extends Product {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Cooking tomato (" + _mass + "grams).");
+        logger.info("Cooking tomato (" + _mass + "grams).");
     }
 
     @Override

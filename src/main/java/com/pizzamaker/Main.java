@@ -2,18 +2,21 @@ package com.pizzamaker;
 
 import com.pizzamaker.PizzaExceptions.IncompatibleComponentException;
 import com.pizzamaker.Products.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
 
         // default equals (its bad I know it)
         IncompatibleComponentException e1 = new IncompatibleComponentException("test");
         IncompatibleComponentException e2 = new IncompatibleComponentException("test");
-        System.out.println(e1.equals(e2));
+        logger.info(e1.equals(e2));
 
         // Adding incompatible products
         IncompatibleProductsChain mainIncompatibleProducts = new IncompatibleProductsChain();
@@ -33,7 +36,7 @@ public class Main {
                     .addPizzaComponent(new Pepper(20))
                     .addPizzaComponent(homePizzaTomatoSauce);
         } catch (IncompatibleComponentException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
 
 //        try {
@@ -50,28 +53,28 @@ public class Main {
 //
 //        homePizza.pizzaInfo();
 //        homePizza.startDelivery();
-//        System.out.println(homePizza);
+//        logger.info(homePizza);
 
-        System.out.println("--------------------------");
-        System.out.println("Functional testing: ");
+        logger.info("--------------------------");
+        logger.info("Functional testing: ");
         // find
-        System.out.println("Something with 50 grams mass: " + homePizza.find(comp -> comp.mass() == 50).get());
-        System.out.println("All cheese in homePizza: " + homePizza.findAll(component -> component instanceof Cheese));
+        logger.info("Something with 50 grams mass: " + homePizza.find(comp -> comp.mass() == 50).get());
+        logger.info("All cheese in homePizza: " + homePizza.findAll(component -> component instanceof Cheese));
 
         PizzaRepository pizzaRepository = new PizzaRepository(homePizza);
 
-        System.out.println("The most heavy component (by mass): " + pizzaRepository
+        logger.info("The most heavy component (by mass): " + pizzaRepository
                 .getMostHeavyComponent()
                 .orElse(null)
         );
-        System.out.println("Average mass of components: " +
+        logger.info("Average mass of components: " +
                 pizzaRepository
                         .getAverageMass()
                         .orElse(Double.NaN)
         );
 
-        System.out.println("Mapped components: ");
-        System.out.println(pizzaRepository
+        logger.info("Mapped components: ");
+        logger.info(pizzaRepository
                 .getMappedComponents(component -> component.mass() > 50 ? "heavy" : "light"));
 
         double averageMushroomsMass = pizzaRepository
@@ -79,6 +82,6 @@ public class Main {
                 .mapToInt(comp -> comp.mass())
                 .average()
                 .orElse(Double.NaN);
-        System.out.println("Average Mushrooms mass: " + averageMushroomsMass);
+        logger.info("Average Mushrooms mass: " + averageMushroomsMass);
     }
 }

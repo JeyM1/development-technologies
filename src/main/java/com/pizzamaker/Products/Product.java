@@ -1,10 +1,14 @@
 package com.pizzamaker.Products;
 
+import com.pizzamaker.Main;
 import com.pizzamaker.PizzaComponent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
 public abstract class Product implements PizzaComponent {
+    protected static final Logger logger = LogManager.getLogger(Product.class.getName());
     protected Integer _mass;
 
     public Product(Integer _mass) {
